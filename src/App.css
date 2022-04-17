@@ -1,38 +1,167 @@
 .App {
-  text-align: center;
+  max-width: 90%;
+  margin: 0 auto;
+  text-align: left;
+  line-height: 1.5;
 }
+
+/* .container {
+  
+} */
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+h1 {
+  font-size: 48px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+h2 {
+  font-size: 30px;
+}
+
+p {
+  font-size: 20px;
+}
+
+.full-container {
+  position: fixed;
+  top: 0px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  width: 100%;
+  background-color: #614385;
+  opacity: 0.7;
+  height: 100px;
+  /* padding-left: 40px; */
+  padding-right: 40px;
+  z-index: 1000;
+
+}
+
+.logo-container { 
+  width: 50%;
+}
+
+.logo-container img { 
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin: 20px auto auto 100px;
+}
+
+/* nav {
+  width: 100%;
+  height: 100px;
+  background-color: blue;
+} */
+
+.nav-div {
+  width: 40%;
+}
+
+/* .nav-links {
+  float: right;
+  margin-top: 40px;
+} */
+
+.nav {
+  text-decoration: none;
+  /* padding-right: 50px;  */
+  /* margin-right: 40px; */
+  font-size: 18px;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.nav:hover, button:hover {
+  color: orange;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+.link-list {
+  display: inline;
+}
+
+.clearFix {
+  display: table;
+  content: '';
+  clear: both;
+}
+
+.article-list-linkstyle {
+  text-decoration: none;
+  color: black;
+}
+
+span {
+  color: #614385;
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 600px;
+}
+
+.flex-child {
+  margin-top: 20px;
+}
+
+.flex-child p {
+  max-width: 450px;
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.display-image {
+  width: 60%;
+}
+
+img {
+  width: 90%;
+  height: 500px;
+}
+
+form {
+  width: 330px;
+  border: 2px solid grey;
+  padding: 40px 40px 20px 60px;
+}
+
+label {
+  font-size: 18px;
+}
+
+input {
+  width: 300px;
+  height: 40px;
+  margin-bottom: 15px;
+  font-size: 18px;
+  padding-left: 5px;
+}
+
+textarea {
+  width: 301px;
+  padding-left: 5px;
+  font-size: 18px;
+}
+
+.btn-submit { 
+  width: 310px;
+  height: 50px;
+  font-size: 20px;
+  background: blue;
+  color: white;
+}
+
+.upvotes {
+  font-style: italic;
+  color: green;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
   }
 }
