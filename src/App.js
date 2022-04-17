@@ -29,7 +29,7 @@ const App = ({ articles, addData }) => {
         <Box className="App" mb="150px">
           <Switch>
             <Route path="/" component={ArticleListPage} exact />
-            <Route path="/articles" component={ArticleListPage} />
+            <Route path="/news-feed" component={ArticleListPage} />
             <Route path="/article/:name" component={ArticlePage} />
             {/* <Route component={PageNotFound} />  */}
           </Switch>

@@ -16,8 +16,8 @@ export const NavBar = () => (
       </li>
         <ul>
           <li className="link-list">
-            <Link className="nav" to="/articles">
-              Articles
+            <Link className="nav" to="/news-feed">
+              News Feed
             </Link>
           </li>
         </ul>
