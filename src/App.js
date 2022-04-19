@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { NavBar } from "./components/NavBar";
 import "./App.css";
@@ -6,24 +6,17 @@ import { Box } from "@chakra-ui/react";
 import ArticleListPage from "./pages/articleListPage/ArticleListPage";
 
 import ArticlePage from "./pages/articlePage/ArticlePage";
-import { getTeslaNews } from "./pages/articleListPage/service";
-import FullPageLoader from "./components/full-page-loader";
 import { Footer } from "./components/Footer";
+import { observer } from "mobx-react-lite";
+
+
+
 export const UserContext = createContext();
 
-const App = ({ articles, addData }) => {
-  const [teslaArticles, setTeslaArticles] = useState([11]);
-    const [loading, setLoading] = useState(true);
+const App = observer(({ articles, addData }) => {
 
-
-  useEffect(() => {
-    getTeslaNews(setTeslaArticles, setLoading);
-  }, []);
-
-  return loading ? (
-    <FullPageLoader />
-  ) : (
-    <UserContext.Provider value={teslaArticles}>
+  return(
+    // <UserContext.Provider value={teslaArticles}>
       <Router>
         <NavBar articles={articles} addData={addData} />
         <Box className="App" mb="150px">
@@ -36,8 +29,8 @@ const App = ({ articles, addData }) => {
         </Box>
         <Footer />
       </Router>
-    </UserContext.Provider>
+    // </UserContext.Provider>
   );
-};
+});
 
 export default App;

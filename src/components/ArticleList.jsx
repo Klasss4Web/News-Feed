@@ -6,10 +6,9 @@ const ArticlesList = ({ articles }) => {
 return (
   <Box width="100%">
     {articles?.map((article, key) => (
-      <>
+      <Box key={key}>
         <Link
           className="article-list-linkstyle"
-          key={key}
           to={`/article/${article?.source?.name}`}
         >
           <Text fontWeight={"bold"} lineHeight={1.2}>
@@ -30,7 +29,7 @@ return (
           </Text>
         </Flex>
         <Divider my="10px" />
-      </>
+      </Box>
     ))}
   </Box>
 );

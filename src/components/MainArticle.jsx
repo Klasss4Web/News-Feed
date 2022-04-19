@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const MainArticle = ({ articles }) => (
   <Box width="100%">
     {articles.map((article, key) => (
-      <>
+      <Box   key={key}>
         <Link
           className="article-list-linkstyle"
           key={key}
@@ -26,7 +26,7 @@ const MainArticle = ({ articles }) => (
           </Text>
         </Flex>
         <Divider my="10px" />
-      </>
+      </Box>
     ))}
   </Box>
 );

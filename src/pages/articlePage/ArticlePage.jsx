@@ -1,12 +1,22 @@
 import { Avatar, Box, Button, Divider, Flex, Heading, Image, Text, Textarea } from "@chakra-ui/react";
 import dayjs from "dayjs";
-import React, { useState, useEffect, useContext } from "react";
-import { UserContext } from "../../App";
+import { observer } from "mobx-react-lite";
+import React, { useState, useEffect } from "react";
 import ArticleList from "../../components/ArticleList";
+import FullPageLoader from "../../components/full-page-loader";
+import { NewsFeedStore } from "../../store/store";
 import { getComments, postComments } from "../articleListPage/service";
 
-const ArticlePage = ({ match }) => {
-  const articles = useContext(UserContext);
+const ArticlePage = observer(({ match }) => {
+
+  const newsFeed = new NewsFeedStore();
+  const [articles, setArticles] = useState([]);
+
+  useEffect(() => {
+    newsFeed.loadData().then((data) => setArticles(data?.articles));
+    // eslint-disable-next-line
+  }, []);
+
   const name = match.params.name;
   const articleContents = articles.find(
     (article) => article?.source?.name?.toLowerCase() === name.toLowerCase()
@@ -15,33 +25,37 @@ const ArticlePage = ({ match }) => {
   const [comment, setComment] = useState("");
   const [comments, setComments] = useState("");
   const [loading, setLoading] = useState(false);
-  const [refresh, setRefresh] = useState(false)
+  const [refresh, setRefresh] = useState(false);
 
   const handleSubmit = () => {
-    setLoading(true)
+    setLoading(true);
     const payload = {
       cartName: name,
       item: { name: name, title: comment, user: "Anonymous" },
     };
-    postComments(payload)
-    .then(()=>setRefresh(true));
+    postComments(payload).then(() => setRefresh(true));
     getComments(name, setComments);
-    setLoading(false)
+    setLoading(false);
     setComment("");
   };
 
-  console.log("dada", articleContents, name, comments);
   useEffect(() => {
-    getComments(name, setComments);
+    getComments(name, setComments, setLoading);
   }, [name, refresh]);
 
   const otherArticles = articles.filter((article) => article.name !== name);
 
   if (!articleContents)
-    return <Heading textAlign={"center"} fontWeight="semibold">No article with the name "{name}" in our archive</Heading>;
+    return (
+      <Heading textAlign={"center"} fontWeight="semibold">
+        No article with the name "{name}" in our archive
+      </Heading>
+    );
 
-  return (
-    <Box px={["20px", "30px", "50px",  "160px"]} mt="100px">
+  return loading ? (
+    <FullPageLoader />
+  ) : (
+    <Box px={["20px", "30px", "50px", "160px"]} mt="100px">
       <Text
         fontSize={["20px", "20px", "26px"]}
         mt="10px"
@@ -78,7 +92,7 @@ const ArticlePage = ({ match }) => {
           color="#fff"
           width="200px"
           onClick={() => handleSubmit()}
-          isDisabled={comment===""}
+          isDisabled={comment === ""}
           isLoading={loading}
         >
           Send
@@ -111,6 +125,6 @@ const ArticlePage = ({ match }) => {
       <ArticleList articles={otherArticles} />
     </Box>
   );
-};
+});
 
 export default ArticlePage;

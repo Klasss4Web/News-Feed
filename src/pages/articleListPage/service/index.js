@@ -25,7 +25,6 @@ export const getTeslaNews = async (setTeslaArticles, setLoading) => {
 };
 
 
-
 export const getWallStreetJournals = async (setWallStreetArticles) => {
   try {
     const result = await http.get(AUTH_ROUTES.GET_WALL_STREET_JOURNAL);
@@ -46,13 +45,14 @@ export const postComments = async (payload) => {
   }
 };
 
-export const getComments = async (name, setComments) => {
+export const getComments = async (name, setComments, setLoading) => {
   try {
     const result = await axiosInstance1.get(AUTH_ROUTES.GET_COMMENTS(name));
-    console.log("comments", result);
     setComments(result)
+    setLoading(false)
   } catch (e) {
     console.log(e);
+    setLoading(false)
   }
 };
 
